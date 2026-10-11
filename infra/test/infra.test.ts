@@ -14,6 +14,7 @@ test('Garage image repository has the expected safeguards', () => {
   template.resourceCountIs('AWS::ECR::Repository', 1);
 
   template.hasResourceProperties('AWS::ECR::Repository', {
+    RepositoryName: 'monster-car-garage',
     ImageScanningConfiguration: {
       ScanOnPush: true,
     },

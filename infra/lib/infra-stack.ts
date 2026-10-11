@@ -7,8 +7,9 @@ export class InfraStack extends cdk.Stack {
     super(scope, id, props);
 
     new ecr.Repository(this, 'GarageImages', {
-      imageScanOnPush: true,
-      removalPolicy: cdk.RemovalPolicy.RETAIN,
+  repositoryName: 'monster-car-garage',
+  imageScanOnPush: true,
+  removalPolicy: cdk.RemovalPolicy.RETAIN,
     });
   }
 }
