@@ -30,3 +30,33 @@ jobs:
       - name: Test and build the garage
         working-directory: garage
         run: sh ./mvnw --batch-mode --no-transfer-progress verify
+  check-infrastructure:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    defaults:
+      run:
+        working-directory: infra
+
+    steps:
+      - name: Get the project code
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: infra/package-lock.json
+
+      - name: Install infrastructure dependencies
+        run: npm ci
+
+      - name: Compile infrastructure code
+        run: npm run build
+
+      - name: Test infrastructure safeguards
+        run: npm run test -- --runInBand
+
+      - name: Generate the AWS blueprint
+        run: npm run cdk -- synth --no-lookups
