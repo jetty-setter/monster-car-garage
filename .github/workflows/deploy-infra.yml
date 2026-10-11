@@ -1,0 +1,66 @@
+name: Deploy Garage Infrastructure
+
+on:
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: garage-infrastructure
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    permissions:
+      contents: read
+      id-token: write
+
+    defaults:
+      run:
+        working-directory: infra
+
+    steps:
+      - name: Get the project code
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: infra/package-lock.json
+
+      - name: Install infrastructure dependencies
+        run: npm ci
+
+      - name: Compile infrastructure code
+        run: npm run build
+
+      - name: Test infrastructure safeguards
+        run: npm run test -- --runInBand
+
+      - name: Generate the AWS blueprint
+        run: npm run cdk -- synth --no-lookups
+
+      - name: Sign in to AWS with temporary credentials
+        uses: aws-actions/configure-aws-credentials@e1253824e5c10ff9df46874f81ed3ec929e19cfd
+        with:
+          role-to-assume: arn:aws:iam::936922781601:role/MonsterGarageGitHub
+          aws-region: us-east-1
+          allowed-account-ids: '936922781601'
+          role-session-name: GarageInfraDeploy
+          role-duration-seconds: 900
+          retry-max-attempts: 3
+
+      - name: Deploy the image repository
+        run: >
+          npm run cdk -- deploy InfraStack
+          --app cdk.out
+          --method change-set
+          --require-approval never
+          --no-lookups
+          --progress events
