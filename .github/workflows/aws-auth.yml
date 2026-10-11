@@ -1,0 +1,30 @@
+name: AWS Connection Check
+
+on:
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  check-aws-login:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    permissions:
+      id-token: write
+
+    steps:
+      - name: Sign in to AWS with temporary credentials
+        # Official AWS action, pinned to release v6.3.0
+        uses: aws-actions/configure-aws-credentials@e1253824e5c10ff9df46874f81ed3ec929e19cfd
+        with:
+          role-to-assume: arn:aws:iam::936922781601:role/MonsterGarageGitHub
+          aws-region: us-east-1
+          allowed-account-ids: '936922781601'
+          role-session-name: GarageAuthCheck
+          role-duration-seconds: 900
+          retry-max-attempts: 3
+
+      - name: Show the AWS identity
+        run: aws sts get-caller-identity

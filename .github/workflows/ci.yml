@@ -30,6 +30,11 @@ jobs:
       - name: Test and build the garage
         working-directory: garage
         run: sh ./mvnw --batch-mode --no-transfer-progress verify
+
+      - name: Build the container image
+        working-directory: .
+        run: docker build -t monster-car-garage:${{ github.sha }} .
+  
   check-infrastructure:
     runs-on: ubuntu-latest
     timeout-minutes: 15
@@ -61,7 +66,4 @@ jobs:
       - name: Generate the AWS blueprint
         run: npm run cdk -- synth --no-lookups
 
-      - name: Build the container image
-        working-directory: .
-        run: docker build -t monster-car-garage:${{ github.sha }} .
-
+     
