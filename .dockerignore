@@ -1,0 +1,10 @@
+.git
+.openai
+infra
+**/node_modules
+garage/target
+garage/data
+**/.env
+**/.env.*
+**/.aws
+**/.DS_Store
