@@ -1,0 +1,68 @@
+name: Publish Garage Image
+
+on:
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: garage-image-publishing
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    permissions:
+      contents: read
+      id-token: write
+
+    env:
+      ECR_REGISTRY: 936922781601.dkr.ecr.us-east-1.amazonaws.com
+      ECR_REPOSITORY: monster-car-garage
+      IMAGE_TAG: ${{ github.sha }}
+
+    steps:
+      - name: Get the project code
+        uses: actions/checkout@v7
+
+      - name: Build and test the container image
+        run: |
+          docker build \
+            --platform linux/amd64 \
+            --tag "$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" \
+            .
+
+      - name: Sign in to AWS with temporary credentials
+        uses: aws-actions/configure-aws-credentials@e1253824e5c10ff9df46874f81ed3ec929e19cfd
+        with:
+          role-to-assume: arn:aws:iam::936922781601:role/MonsterGarageGitHub
+          aws-region: us-east-1
+          allowed-account-ids: '936922781601'
+          role-session-name: GarageImagePublish
+          role-duration-seconds: 900
+          retry-max-attempts: 3
+
+      - name: Sign Docker in to ECR
+        shell: bash
+        run: |
+          aws ecr get-login-password --region us-east-1 |
+            docker login \
+              --username AWS \
+              --password-stdin "$ECR_REGISTRY"
+
+      - name: Upload the container image
+        run: |
+          docker push "$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+
+      - name: Verify the image exists in ECR
+        run: |
+          aws ecr describe-images \
+            --repository-name "$ECR_REPOSITORY" \
+            --image-ids "imageTag=$IMAGE_TAG" \
+            --region us-east-1 \
+            --query 'imageDetails[0].{Tags:imageTags,Digest:imageDigest,PushedAt:imagePushedAt}' \
+            --output json \
+            --no-cli-pager
