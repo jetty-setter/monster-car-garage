@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f2eee5">
+    <title>Big Wheel — Family Garage</title>
+    <link rel="icon" href="icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="styles.css">
+     <script src="app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#workshop">Skip to workshop</a>
+    <div class="site-shell">
+      <header class="masthead">
+        <a class="wordmark" href="index.html">
+          <svg class="brand-wheel" viewBox="0 0 48 48" aria-hidden="true">
+            <circle cx="24" cy="24" r="20" fill="none" stroke="currentColor" stroke-width="6" stroke-dasharray="6 3"/>
+            <circle cx="24" cy="24" r="10" fill="none" stroke="currentColor" stroke-width="3"/>
+            <path d="M24 14v20M14 24h20" stroke="currentColor" stroke-width="3"/>
+          </svg>
+          <span>BIG WHEEL<span class="wordmark-subtitle">FAMILY GARAGE</span></span>
+        </a>
+        <nav class="navigation" aria-label="Main navigation">
+          <a class="current-page" href="#workshop" aria-current="page">Workshop</a>
+          <a href="#garage">Our garage <span class="count" id="garage-count">0</span></a>
+        </nav>
+        <span class="masthead-note">A little dirt never hurt.</span>
+      </header>
+
+      <main>
+        <div class="page-heading">
+          <div><p class="overline">THE FAMILY WORKSHOP</p><h1>Build a truck.<br>Make it yours.</h1></div>
+          <p class="heading-note">Pick the paint. Fit the wheels.<br> Leave the sensible ideas outside.</p>
+        </div>
+
+        <section class="workshop" id="workshop" aria-label="Monster truck workshop" tabindex="-1">
+          <aside class="control-panel" aria-label="Truck customization">
+            <div class="panel-heading"><span>BUILD SHEET</span><span>No. 001</span></div>
+            <fieldset class="control-group">
+              <legend><span class="section-number">01</span> Body shop</legend>
+              <div class="body-options">
+                <button class="body-choice selected" aria-pressed="true" disabled>
+                  <svg viewBox="0 0 110 66" aria-hidden="true"><path d="M13 34V19h28v15h8V13h22l13 21h13v13H13Z" fill="#ba5831" stroke="#252e32" stroke-width="2"/><path d="M58 18h10l8 14H58Z" fill="#d5e1de"/><circle cx="30" cy="49" r="14" fill="#252e32"/><circle cx="81" cy="49" r="14" fill="#252e32"/><circle cx="30" cy="49" r="6" fill="#e9e2d6"/><circle cx="81" cy="49" r="6" fill="#e9e2d6"/></svg>
+                  <span>Pickup</span>
+                </button>
+                <button class="body-choice" disabled>
+                  <svg viewBox="0 0 110 66" aria-hidden="true"><path d="M14 44V13h58l22 21v13H14Z" fill="#b3b7ac" stroke="#252e32" stroke-width="2"/><path d="M63 18h7l14 14H63Z" fill="#d5e1de"/><circle cx="30" cy="49" r="14" fill="#252e32"/><circle cx="81" cy="49" r="14" fill="#252e32"/><circle cx="30" cy="49" r="6" fill="#e9e2d6"/><circle cx="81" cy="49" r="6" fill="#e9e2d6"/></svg>
+                  <span>Van</span>
+                </button>
+                <button class="body-choice" disabled>
+                  <svg viewBox="0 0 110 66" aria-hidden="true"><path d="m21 34 21-21h29l16 21M37 34V16M67 34V16" fill="none" stroke="#252e32" stroke-width="4"/><path d="M14 34h81v13H14Z" fill="#b3b7ac" stroke="#252e32" stroke-width="2"/><circle cx="30" cy="49" r="14" fill="#252e32"/><circle cx="81" cy="49" r="14" fill="#252e32"/><circle cx="30" cy="49" r="6" fill="#e9e2d6"/><circle cx="81" cy="49" r="6" fill="#e9e2d6"/></svg>
+                  <span>Buggy</span>
+                </button>
+              </div>
+            </fieldset>
+
+            <fieldset class="control-group">
+              <legend><span class="section-number">02</span> Paint booth</legend>
+              <div class="paint-options" id="paint-options">
+                <button class="paint-swatch selected" data-color="#ba5831" aria-label="Orange paint" aria-pressed="true" style="--swatch:#ba5831" disabled><span aria-hidden="true">✓</span></button>
+                <button class="paint-swatch" data-color="#bd3e3c" aria-label="Red paint" aria-pressed="false" style="--swatch:#bd3e3c" disabled><span aria-hidden="true">✓</span></button>
+                <button class="paint-swatch" data-color="#396b9c" aria-label="Blue paint" aria-pressed="false" style="--swatch:#396b9c" disabled><span aria-hidden="true">✓</span></button>
+                <button class="paint-swatch" data-color="#537858" aria-label="Green paint" aria-pressed="false" style="--swatch:#537858" disabled><span aria-hidden="true">✓</span></button>
+                <button class="paint-swatch light" data-color="#e5b347" aria-label="Yellow paint" aria-pressed="false" style="--swatch:#e5b347" disabled><span aria-hidden="true">✓</span></button>
+                <button class="paint-swatch" data-color="#785b8c" aria-label="Purple paint" aria-pressed="false" style="--swatch:#785b8c" disabled><span aria-hidden="true">✓</span></button>
+              </div>
+              <p class="control-note">One truck. Absolutely your colors.</p>
+            </fieldset>
+
+            <fieldset class="control-group">
+              <legend><span class="section-number">03</span> Tire rack</legend>
+              <div class="tire-options">
+                <button class="tire-choice selected" aria-pressed="true" disabled>
+                  <svg viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="30" r="23" fill="#252e32" stroke="#252e32" stroke-width="5" stroke-dasharray="6 3"/><circle cx="30" cy="30" r="13" fill="#e9e2d6"/><circle cx="30" cy="30" r="5" fill="#252e32"/></svg>
+                  <span>Mud tires</span>
+                </button>
+                <button class="tire-choice" disabled>
+                  <svg viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="30" r="25" fill="#252e32"/><circle cx="30" cy="30" r="18" fill="none" stroke="#4c5659" stroke-width="2"/><circle cx="30" cy="30" r="10" fill="#e9e2d6"/><circle cx="30" cy="30" r="4" fill="#252e32"/></svg>
+                  <span>Balloon tires</span>
+                </button>
+              </div>
+            </fieldset>
+
+            <fieldset class="control-group last-group">
+              <legend><span class="section-number">04</span> Sticker drawer</legend>
+              <div class="decal-options">
+                <button class="decal-choice selected" aria-label="Lightning decal" aria-pressed="true" disabled><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M18 2 6 18h10l-2 12 12-17H16Z" fill="currentColor"/></svg></button>
+                <button class="decal-choice" aria-label="Star decal" disabled><svg viewBox="0 0 32 32" aria-hidden="true"><path d="m16 2 4 10 11 1-8 7 2 11-9-6-9 6 2-11-8-7 11-1Z" fill="currentColor"/></svg></button>
+                <button class="decal-choice" aria-label="Stripe decal" disabled><svg viewBox="0 0 32 32" aria-hidden="true"><path d="m2 26 5-20h6L8 26Zm10 0 5-20h6l-5 20Zm10 0 5-20h5l-5 20Z" fill="currentColor"/></svg></button>
+              </div>
+            </fieldset>
+          </aside>
+
+          <div class="workbench">
+            <div class="track">
+              <div class="track-heading"><span>TEST YARD / BAY 01</span><span>GOOD TRUCK WEATHER</span></div>
+              <!-- Original SVG artwork. API data can later set the paint group's fill. -->
+              <svg class="truck-scene" viewBox="0 0 820 520" role="img" aria-labelledby="truck-title truck-description">
+                <title id="truck-title">An orange monster pickup in the test yard</title>
+                <desc id="truck-description">A pickup with oversized mud tires, a lightning decal, and a friendly face.</desc>
+                <defs>
+                  <pattern id="yard-grid" width="34" height="34" patternUnits="userSpaceOnUse"><path d="M34 0H0v34" fill="none" stroke="#a3b8bc" stroke-width=".6" opacity=".4"/></pattern>
+                  <g id="mud-wheel">
+                    <circle r="72" fill="#252e32" stroke="#252e32" stroke-width="10" stroke-dasharray="15 9"/>
+                    <circle r="61" fill="none" stroke="#475357" stroke-width="3"/>
+                    <circle r="39" fill="#dcd7c9" stroke="#111b20" stroke-width="5"/>
+                    <circle r="28" fill="#87999a" stroke="#26343a" stroke-width="3"/>
+                    <path d="M0-27V27M-27 0H27M-19-19l38 38M-19 19l38-38" stroke="#dcd7c9" stroke-width="6"/>
+                    <circle r="12" fill="#26343a" stroke="#dcd7c9" stroke-width="3"/>
+                    <circle cy="-48" r="3" fill="#748282"/><circle cx="48" r="3" fill="#748282"/>
+                    <circle cy="48" r="3" fill="#748282"/><circle cx="-48" r="3" fill="#748282"/>
+                  </g>
+                </defs>
+                <g aria-hidden="true">
+                  <rect width="820" height="520" fill="#d1e0e0"/>
+                  <rect width="820" height="520" fill="url(#yard-grid)"/>
+                  <circle cx="662" cy="114" r="38" fill="#ece1b7"/>
+                  <path d="M43 149h116M59 138h63M585 181h112" stroke="#edf0e5" stroke-width="12" stroke-linecap="round"/>
+                  <path d="M0 295 143 231l131 51 117-79 162 89 129-57 138 56v80H0Z" fill="#b6cbca"/>
+                  <path d="M0 337 190 298l121 45 238-47 122 36 149-29v115H0Z" fill="#a5bdb8"/>
+                  <path d="M0 377h820v143H0Z" fill="#b8b8a3"/>
+                  <path d="M0 377h820" stroke="#6e8380" stroke-width="2"/>
+                  <path d="M42 447h40m12 0h18m552 15h31m12 0h59M330 484h150" stroke="#8f9c8d" stroke-width="3" stroke-linecap="round"/>
+                  <path d="m689 373 48-29h39v29" fill="#a87e53" stroke="#6c674e" stroke-width="2"/>
+                  <path d="M748 310v34" stroke="#576e6b" stroke-width="3"/>
+                  <path d="M748 310h28l-8 9 8 9h-28Z" fill="#ba5831"/>
+                  <ellipse cx="400" cy="405" rx="256" ry="17" fill="#556760" opacity=".28"/>
+                </g>
+                <g id="truck" transform="translate(82 35)">
+                  <g fill="none" stroke="#293a3c" stroke-linejoin="round" stroke-linecap="round">
+                    <path d="M115 260h374l-42 42H163Z" fill="#556765" stroke-width="6"/>
+                    <path d="m180 279 54 60h155l59-60M180 335l52-51m156 0 57 51" stroke-width="10"/>
+                    <path d="m182 282 13 13-12 12 14 12-12 12 14 12m232-61-13 13 12 12-14 12 12 12-14 12" stroke="#e4bc6a" stroke-width="6"/>
+                    <path d="M170 345h278" stroke-width="14"/>
+                  </g>
+                  <g id="truck-paint" fill="#ba5831" stroke="#25383b" stroke-width="4" stroke-linejoin="round">
+                    <path d="M88 219v-62h178v59h24v-96h111l62 94h73v62H88Z"/>
+                    <path d="M88 219h178v57H88Z"/>
+                    <path d="M294 215h151v61H294Z"/>
+                    <path d="M443 215h94v61h-94Z"/>
+                  </g>
+                  <g aria-hidden="true">
+                    <path d="M304 130h44v72h-44Zm57 0h35l49 72h-84Z" fill="#d9e3d6" stroke="#25383b" stroke-width="4" stroke-linejoin="round"/>
+                    <path d="m312 139 22 19m35-19 27 27" stroke="#fff" opacity=".55" stroke-width="5"/>
+                    <ellipse cx="389" cy="177" rx="9" ry="13" fill="#25383b"/><ellipse cx="422" cy="177" rx="9" ry="13" fill="#25383b"/>
+                    <circle cx="392" cy="173" r="3" fill="#fff"/><circle cx="425" cy="173" r="3" fill="#fff"/>
+                    <path d="M88 160h174v11H88ZM296 217h150v11H296Z" fill="#fff" opacity=".13"/>
+                    <path d="M91 267h445v9H91Z" fill="#172e31" opacity=".22"/>
+                    <path d="M315 212v58M431 214v55" stroke="#263b3e" stroke-width="2"/>
+                    <path d="M324 224h22" stroke="#eedbc2" stroke-width="5" stroke-linecap="round"/>
+                    <path id="truck-decal" d="m382 229-21 24h15l-4 15 23-26h-15Z" fill="#f5e7c4"/>
+                    <rect x="520" y="222" width="20" height="19" rx="3" fill="#efdaa5" stroke="#25383b" stroke-width="3"/>
+                    <rect x="79" y="232" width="11" height="19" rx="2" fill="#ae332a" stroke="#25383b" stroke-width="3"/>
+                    <path d="M503 257q14 11 28 0" fill="none" stroke="#25383b" stroke-width="3" stroke-linecap="round"/>
+                    <path d="M76 273h88m295 0h87" stroke="#748784" stroke-width="9" stroke-linecap="round"/>
+                    <path d="M241 188v-47h-10v47" fill="#839a96" stroke="#25383b" stroke-width="3"/>
+                    <path d="M237 143v-30l-10-8" fill="none" stroke="#25383b" stroke-width="7" stroke-linecap="round"/>
+                  </g>
+                  <use href="#mud-wheel" x="163" y="330"/>
+                  <use href="#mud-wheel" x="448" y="330"/>
+                </g>
+              </svg>
+              <div class="track-caption"><span id="truck-name">THE PICKUP</span><span>Built by us. Driven by imagination.</span></div>
+            </div>
+
+            <div class="test-controls">
+              <button id="jump-button" class="jump-button" disabled><span aria-hidden="true">↑</span> Take it for a jump</button>
+              <span class="test-note">The test yard is ready.<br> We’ll connect the controls as we build.</span>
+            </div>
+            <section class="save-strip" aria-labelledby="save-title">
+              <div class="save-heading">
+                <p class="overline">ONE FOR THE COLLECTION</p>
+                <h2 id="save-title">A name makes it official.</h2>
+                <p>Try it out, then give it a parking spot.</p>
+              </div>
+              <form id="truck-form" class="truck-form" novalidate>
+                <label for="truck-name-input">Truck name</label>
+                <input id="truck-name-input" type="text" maxlength="40" required disabled placeholder="Name your truck" aria-describedby="design-note design-status">
+                <div class="design-actions">
+                  <button id="preview-button" type="button" class="secondary-button" disabled>Preview</button>
+                  <button id="save-button" type="submit" class="secondary-button save-button" disabled>Save truck</button>
+                </div>
+                <p id="design-note" class="design-note">Preview does not store anything. Save adds a new truck to your local garage.</p>
+                <p id="design-status" class="build-status" role="status" aria-live="polite">Connecting to your garage…</p>
+              </form>
+            </section>
+          </div>
+        </section>
+
+        <section id="garage" class="garage-section" aria-labelledby="garage-title">
+          <div class="garage-heading">
+            <div><p class="overline">PARKED AND READY</p><h2 id="garage-title">Our garage</h2></div>
+            <div class="garage-actions">
+              <button id="new-truck" type="button" class="secondary-button">New truck</button>
+              <button id="refresh-garage" type="button" class="secondary-button">Refresh</button>
+            </div>
+          </div>
+          <p id="garage-status" role="status" aria-live="polite">Loading saved trucks…</p>
+          <div id="garage-cards" class="garage-cards"></div>
+        </section>
+
+        <section class="coloring-strip" aria-labelledby="coloring-title">
+          <svg class="coloring-icon" viewBox="0 0 72 78" aria-hidden="true">
+            <path d="M8 4h43l14 14v55H8Z" fill="#fffaf1" stroke="#293a3c" stroke-width="2"/>
+            <path d="M51 4v14h14M17 29h29m-29 6h18" fill="none" stroke="#293a3c" stroke-width="2"/>
+            <path d="M18 51V41h14l8 10h13v9H18Z" fill="none" stroke="#293a3c" stroke-width="2"/>
+            <circle cx="26" cy="60" r="7" fill="#fffaf1" stroke="#293a3c" stroke-width="2"/><circle cx="47" cy="60" r="7" fill="#fffaf1" stroke="#293a3c" stroke-width="2"/>
+          </svg>
+          <div><p class="overline">NEXT STOP: THE KITCHEN TABLE</p><h2 id="coloring-title">Same truck. A fresh box of crayons.</h2><p>A printable version of your creation is on our build list.</p></div>
+          <button id="print-button" class="text-button" disabled>Make a coloring page <span aria-hidden="true">↗</span></button>
+        </section>
+      </main>
+
+      <footer class="site-footer"><span>BIG WHEEL / FAMILY GARAGE</span><span>Original trucks. Small builders. No rush.</span></footer>
+    </div>
+  </body>
+</html>
