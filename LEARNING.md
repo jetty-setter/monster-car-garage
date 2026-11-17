@@ -1,6 +1,6 @@
-# From writing code to running a platform
+# How Monster Car Garage works
 
-You built the first working request, the Controller/Service separation, the frontend connection, and the database types. This accelerated pass completes saving and reopening trucks, adds automated checks, and packages the frontend with Java. We can now learn the surrounding platform using a real application.
+The garage connects a plain JavaScript frontend to a Spring Boot API and a SQL database. This walkthrough uses the default local H2 setup.
 
 ## Follow one Save click
 
@@ -51,7 +51,7 @@ Java files are under `garage/src/main/java/com/bigwheel/garage/`. Tests are unde
 
 Names and colors are the current stored fields. Body, tires, and decal values in responses are fixed defaults, not completed customization features. Each Save adds a new row; updating and deleting are not implemented.
 
-## Lesson 1: observe the network
+## Trace a request in the browser
 
 1. Start the app using README instructions. Open browser developer tools and the Network panel.
 2. Choose a paint, name it `Blue Thunder`, and click Preview. Look for a POST to `/api/trucks/preview`.
@@ -60,39 +60,22 @@ Names and colors are the current stored fields. Body, tires, and decal values in
 5. Click New truck, then open Blue Thunder from Our garage. Look for the GET with its ID.
 6. Refresh the page. The `?truck=...` URL tells the page which stored truck to reload.
 
-Explain it aloud: “The screen makes a request. The backend checks it and stores the design. The database gives it an ID, and the screen uses that ID to reopen it.”
-
-## Lesson 2: prove persistence
+## Check that a truck survives a restart
 
 1. Save a distinctively named truck. Note its ID.
 2. Stop the backend with Control+C. Restart from the same `garage` directory.
 3. Open Our garage. The name, ID, and paint should still be there.
-4. Next, we can inspect the `trucks` table with SQL while respecting H2's file locking. Do not delete or replace the database to inspect it.
 
-The browser's current selection is temporary JavaScript state. The saved collection is SQL data on disk. These are separate things.
-
-## Lesson 3: tests are repeatable checks
+## API tests
 
 Run `sh ./mvnw verify` from the `garage` directory.
 
-Read one test at a time: send a request, check its response, check the database result. The suite covers preview without saving, creation and readback, ordering, missing IDs, invalid inputs, startup, and serving frontend files.
+The suite covers preview without saving, creation and readback, ordering, missing IDs, invalid inputs, startup, and serving frontend files.
 
-Tests use `jdbc:h2:mem:...`: disposable memory databases, not `data/garage.mv.db`. Their table-clearing operations affect only those test databases. Automated tests do not replace browser checks or a restart-persistence check.
+Tests use a disposable in-memory H2 database so they can clear it between cases.
 
-## Lesson 4: a build is a deliverable
+## Run the packaged app
 
 `verify` produces `garage/target/garage-0.0.1-SNAPSHOT.jar`. It contains compiled Java, dependencies, and copied frontend files. Run it with Java from the `garage` directory to retain the same relative database location.
 
-The database is **not** inside the JAR. Replacing an application package should not erase its data. The current H2 file would still need a persistent disk if the application were hosted.
-
-## Next: pipeline, deployment, and operations
-
-We have not configured these yet. Learn them in this order:
-
-1. **CI:** a change triggers checkout, Java setup, `verify`, and a saved build artifact. A failing test stops that candidate.
-2. **Deployment:** run that same artifact in a separate environment with its own database and settings. Keep development data separate.
-3. **Production readiness:** authentication/ownership, credentials, schema migrations, persistent storage, backups, HTTPS, and recovery plans.
-4. **Operations:** logs explain events; health checks say whether it is responding; metrics show patterns. Practice a failed request and a stopped backend locally first.
-5. **Background jobs:** add queues/retries only when there is an actual slow task, such as generating a printable asset. Then make duplicate messages safe before retrying them automatically.
-
-The next useful exercise is tracing your saved truck all the way to its database row. After that, we can turn the existing build command into a CI pipeline together.
+The H2 database stays in `garage/data` when you rebuild the JAR. The [README](README.md#run-locally) also documents the Docker Compose setup with PostgreSQL.
